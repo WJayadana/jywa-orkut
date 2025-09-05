@@ -1,0 +1,48 @@
+{
+  "name": "jywa-orkut",
+  "version": "1.0.0",
+  "description": "API wrapper untuk Order Kuota",
+  "main": "dist/jywa.js",
+  "module": "dist/jywa.js",
+  "types": "dist/jywa.d.ts",
+  "type": "module",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "package:publish": "npm run build && npm pack && npm publish",
+    "docs:generate": "typedoc --out docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WJayadana/jywa-orkut.git"
+  },
+  "keywords": [
+    "orkut",
+    "jywa-orkut",
+    "orderkuota"
+  ],
+  "author": "WJayadana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WJayadana/jywa-orkut/issues"
+  },
+  "homepage": "https://github.com/WJayadana/jywa-orkut#readme",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.0.0",
+    "typedoc-plugin-markdown": "^4.6.4",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/qs": "^6.14.0",
+    "axios": "^1.7.9",
+    "qrcode": "^1.5.4",
+    "qs": "^6.14.0",
+    "typedoc": "^0.28.5"
+  },
+  "private": false
+}
