@@ -1,6 +1,6 @@
 {
   "name": "jywa-orkut",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API wrapper untuk Order Kuota",
   "main": "dist/jywa.js",
   "module": "dist/jywa.js",
