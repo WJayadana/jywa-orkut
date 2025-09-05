@@ -1,33 +1,23 @@
-# JywaOrkut
+# OrderKuota Node.js API Wrapper
 
-JywaOrkut adalah library JavaScript untuk berinteraksi dengan sistem pembayaran QRIS di Indonesia melalui API OrderKuota. Library ini menyediakan fungsi untuk autentikasi OTP, manajemen token, pembayaran QRIS, dan pembuatan kode QR.
+A TypeScript-first Node.js wrapper for the OrderKuota Indonesian QRIS payment API.
 
-## Fitur
+## Features
 
-*   **Autentikasi OTP:** Mendapatkan kode OTP untuk login.
-*   **Manajemen Token:** Mendapatkan dan menyimpan token autentikasi.
-*   **Pembayaran QRIS:** Membuat pembayaran menggunakan QRIS Ajaib.
-*   **Riwayat Transaksi:** Melihat riwayat transaksi QRIS.
-*   **Informasi Akun:** Mendapatkan informasi akun dan saldo.
-*   **Pembuatan Kode QR:** Membuat gambar kode QR dari string QRIS.
+- ✅ **Full TypeScript Support** - Complete type definitions and IDE autocomplete
+- ✅ **QRIS Payment Generation** - Generate QRIS Ajaib payments with QR codes
+- ✅ **Authentication Flow** - OTP-based login with token management
+- ✅ **Transaction History** - Fetch and filter QRIS transaction records
+- ✅ **Balance Checking** - Check account and QRIS balances
+- ✅ **QR Code Generation** - Convert QRIS strings to base64 QR images
 
-## Instalasi
-
-Anda dapat menginstal JywaOrkut menggunakan npm atau yarn:
+## Installation
 
 ```bash
 npm install jywa-orkut
 ```
 
-atau
-
-```bash
-yarn add jywa-orkut
-```
-
-## Penggunaan
-
-Berikut adalah contoh penggunaan JywaOrkut:
+## Quick Start
 
 ```javascript
 import JywaOrkut from 'jywa-orkut';
@@ -37,171 +27,70 @@ const client = new JywaOrkut({
   password: 'your-password'
 });
 
-// Mendapatkan OTP
-client.getOTP()
-  .then(otpResponse => {
-    console.log(otpResponse);
-    // { status: 'success', email: 'otp@example.com', message: 'OTP telah dikirim ke otp@example.com. Silakan periksa email Anda.' }
+// Request OTP
+const otp = await client.getOTP();
+console.log('OTP sent to:', otp.email);
 
-    // Mendapatkan token
-    return client.getToken('123456');
-  })
-  .then(tokenResponse => {
-    console.log(tokenResponse);
-    // { status: 'success', token: '...', id: '...', name: '...', username: '...', balance: 100000, message: 'Token berhasil diperoleh.' }
+// Get authentication token
+const token = await client.getToken('123456');
 
-    // Membuat pembayaran QRIS
-    return client.generateQRISAjaib(10000);
-  })
-  .then(qrisResponse => {
-    console.log(qrisResponse);
-    // { success: true, results: { qris: '...', ref_id: '...' } }
+// Generate QRIS payment
+const payment = await client.generateQRISAjaib(10000);
+const qrString = payment.qris_ajaib.results.qr_string;
 
-    // Membuat gambar QR Code
-    return client.generateQRImage(qrisResponse.results.qris);
-  })
-  .then(qrImage => {
-    console.log(qrImage);
-    // data:image/png;base64,...
-  })
-  .catch(error => {
-    console.error(error);
-  });
+// Generate QR code image
+const qrImage = await client.generateQRImage(qrString);
 ```
 
-## Konfigurasi
-
-| Parameter  | Deskripsi                                                                | Wajib   |
-| :--------- | :----------------------------------------------------------------------- | :------ |
-| `username` | Username akun OrderKuota Anda.                                           | Ya      |
-| `password` | Password akun OrderKuota Anda.                                           | Ya      |
-| `token`    | Token autentikasi (opsional, jika sudah memiliki token sebelumnya).       | Tidak   |
-| `baseQrString` | Base QR String (opsional, jika ingin menggunakan QRIS dengan format custom). | Tidak   |
-
-## API
-
-### `getOTP()`
-
-Meminta kode OTP untuk autentikasi.
-
-```javascript
-client.getOTP()
-  .then(response => {
-    console.log(response);
-    // { status: 'success', email: 'otp@example.com', message: 'OTP telah dikirim ke otp@example.com. Silakan periksa email Anda.' }
-  });
-```
-
-### `getToken(otp)`
-
-Mendapatkan token autentikasi menggunakan kode OTP.
-
-```javascript
-client.getToken('123456')
-  .then(response => {
-    console.log(response);
-    // { status: 'success', token: '...', id: '...', name: '...', username: '...', balance: 100000, message: 'Token berhasil diperoleh.' }
-  });
-```
-
-### `generateQRISAjaib(amount)`
-
-Membuat pembayaran QRIS Ajaib.
-
-```javascript
-client.generateQRISAjaib(10000)
-  .then(response => {
-    console.log(response);
-    // { success: true, results: { qris: '...', ref_id: '...' } }
-  });
-```
-
-### `getQRISHistory(historyType, options)`
-
-Mendapatkan riwayat transaksi QRIS.
-
-*   `historyType`: Tipe riwayat transaksi (`'qris_history'` atau `'qris_ajaib_history'`).
-*   `options`: Opsi filter riwayat transaksi (opsional).
-
-```javascript
-client.getQRISHistory('qris_history', { page: 2 })
-  .then(response => {
-    console.log(response);
-    // { success: true, results: [...] }
-  });
-```
-
-### `fetchQrisMenu()`
-
-Mendapatkan menu QRIS dan informasi akun.
-
-```javascript
-client.fetchQrisMenu()
-  .then(response => {
-    console.log(response);
-    // { success: true, account: { success: true, results: { balance: 100000, qris_balance: 50000 } }, qris_menu: [...] }
-  });
-```
-
-### `checkBalance()`
-
-Mengecek saldo akun.
-
-```javascript
-client.checkBalance()
-  .then(response => {
-    console.log(response);
-    // { success: true, balance: 100000, qris_balance: 50000 }
-  });
-```
-
-### `generateQRImage(qrisString, options)`
-
-Membuat gambar kode QR dari string QRIS.
-
-```javascript
-client.generateQRImage('...', { width: 512 })
-  .then(response => {
-    console.log(response);
-    // data:image/png;base64,...
-  });
-```
-
-## Tipe Data
-
-### `OrderKuotaConfig`
+## TypeScript Usage
 
 ```typescript
-interface OrderKuotaConfig {
-  username: string;
-  password: string;
-  token?: string;
-  baseQrString?: string;
+import JywaOrkut, { OrderKuotaConfig, OrderKuotaError } from 'jywa-orkut';
+
+const config: OrderKuotaConfig = {
+  username: 'your-username',
+  password: 'your-password'
+};
+
+const client = new JywaOrkut(config);
+
+try {
+  const payment = await client.generateQRISAjaib(25000);
+  // Full type safety and IDE autocomplete
+} catch (error) {
+  if (error instanceof OrderKuotaError) {
+    console.error(`Error [${error.code}]:`, error.message);
+  }
 }
 ```
 
-### `HistoryOptions`
+## Examples
 
-```typescript
-interface HistoryOptions {
-  keterangan?: string;
-  jumlah?: string;
-  page?: string;
-  dari_tanggal?: string;
-  ke_tanggal?: string;
-}
+- [`example/typescript-example.ts`](example/typescript-example.ts) - Complete TypeScript workflow
+- [`example/javascript-example.js`](example/javascript-example.js) - JavaScript implementation
+
+Run examples:
+```bash
+npm run example:js    # JavaScript example
+npm run example:ts    # TypeScript example
 ```
 
-## Error
+## Documentation
 
-Library ini dapat menghasilkan error dengan kode berikut:
+📚 **Complete API documentation**: [GitHub Pages](https://wjayadana.github.io/jywa-orkut/)
 
-*   `MISSING_CONFIG`: Konfigurasi tidak lengkap (username dan password wajib).
-*   `INVALID_CREDENTIALS`: OTP tidak valid atau token tidak ditemukan.
-*   `INVALID_AMOUNT`: Jumlah pembayaran tidak valid.
-*   `INVALID_RESPONSE`: Respon API tidak valid.
-*   `QR_GENERATION_FAILED`: Gagal membuat gambar QR Code.
+## Development
 
-## Lisensi
+```bash
+# Install dependencies
+npm install
+
+# Build project
+npm run build
+
+# Generate documentation
+npm run docs:generate
+```
+
 
 [MIT](LICENSE)
