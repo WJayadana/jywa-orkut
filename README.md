@@ -14,13 +14,13 @@ A TypeScript-first Node.js wrapper for the OrderKuota Indonesian QRIS payment AP
 ## Installation
 
 ```bash
-npm install orderkuota
+npm install jywa-orkut
 ```
 
 ## Quick Start
 
 ```javascript
-import OrderKuota from 'orderkuota';
+import OrderKuota from 'jywa-orkut';
 
 const client = new OrderKuota({
   username: 'your-username',
@@ -45,7 +45,7 @@ const qrImage = await client.generateQRImage(qrString);
 ## TypeScript Usage
 
 ```typescript
-import OrderKuota, { OrderKuotaConfig, OrderKuotaError } from 'orderkuota';
+import OrderKuota, { OrderKuotaConfig, OrderKuotaError } from 'jywa-orkut';
 
 const config: OrderKuotaConfig = {
   username: 'your-username',

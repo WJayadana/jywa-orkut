@@ -98,19 +98,21 @@ export default class OrderKuota {
 
       // Return API response directly
       if (data?.success === false) {
-        return data;
+        return { author: "WJayadana", ...data };
       }
 
       const email = data?.results?.otp_value;
 
       if (!email) {
         return {
+          author: "WJayadana",
           success: false,
           message: "Failed to get OTP email from response",
         };
       }
 
       return {
+        author: "WJayadana",
         status: "success",
         email: email,
         message: `OTP has been sent to ${email}. Please check your email.`,
@@ -122,12 +124,14 @@ export default class OrderKuota {
 
       if (error instanceof AxiosError) {
         return {
+          author: "WJayadana",
           success: false,
           message: `Network error: ${error.message}`,
         };
       }
 
       return {
+        author: "WJayadana",
         success: false,
         message: `Unexpected error during OTP request: ${error}`,
       };
@@ -170,11 +174,12 @@ export default class OrderKuota {
 
       // Return API response directly
       if (data?.success === false) {
-        return data;
+        return { author: "WJayadana", ...data };
       }
 
       if (!data?.results?.token) {
         return {
+          author: "WJayadana",
           success: false,
           message: "Token not found in response.",
         };
@@ -183,6 +188,7 @@ export default class OrderKuota {
       this.token = data.results.token;
 
       return {
+        author: "WJayadana",
         status: "success",
         token: data.results.token,
         id: data.results.id,
@@ -198,12 +204,14 @@ export default class OrderKuota {
 
       if (error instanceof AxiosError) {
         return {
+          author: "WJayadana",
           success: false,
           message: `Network error: ${error.message}`,
         };
       }
 
       return {
+        author: "WJayadana",
         success: false,
         message: `Unexpected error during token request: ${error}`,
       };
@@ -264,7 +272,7 @@ export default class OrderKuota {
         },
       );
 
-      return response.data;
+  return { author: "WJayadana", ...response.data };
     } catch (error) {
       if (error instanceof OrderKuotaError) {
         throw error;
@@ -272,12 +280,14 @@ export default class OrderKuota {
 
       if (error instanceof AxiosError) {
         return {
+          author: "WJayadana",
           success: false,
           message: `Network error: ${error.message}`,
         };
       }
 
       return {
+        author: "WJayadana",
         success: false,
         message: `Unexpected error during QRIS history request: ${error}`,
       };
@@ -329,7 +339,7 @@ export default class OrderKuota {
         },
       );
 
-      return response.data;
+  return { author: "WJayadana", ...response.data };
     } catch (error) {
       if (error instanceof OrderKuotaError) {
         throw error;
@@ -337,12 +347,14 @@ export default class OrderKuota {
 
       if (error instanceof AxiosError) {
         return {
+          author: "WJayadana",
           success: false,
           message: `Network error: ${error.message}`,
         };
       }
 
       return {
+        author: "WJayadana",
         success: false,
         message: `Unexpected error during QRIS menu request: ${error}`,
       };
@@ -394,7 +406,7 @@ export default class OrderKuota {
         },
       );
 
-      return response.data;
+  return { author: "WJayadana", ...response.data };
     } catch (error) {
       if (error instanceof OrderKuotaError) {
         throw error;
@@ -402,12 +414,14 @@ export default class OrderKuota {
 
       if (error instanceof AxiosError) {
         return {
+          author: "WJayadana",
           success: false,
           message: `Network error: ${error.message}`,
         };
       }
 
       return {
+        author: "WJayadana",
         success: false,
         message: `Unexpected error during QRIS Ajaib generation: ${error}`,
       };
@@ -423,6 +437,7 @@ export default class OrderKuota {
     try {
       if (!this.token) {
         return {
+          author: "WJayadana",
           success: false,
           message: "Token is required. Please call getToken() first.",
         };
@@ -432,6 +447,7 @@ export default class OrderKuota {
 
       if (menuResponse?.success === false) {
         return {
+          author: "WJayadana",
           success: false,
           message: menuResponse?.message || "Failed to check balance",
         };
@@ -439,6 +455,7 @@ export default class OrderKuota {
 
       if (menuResponse?.account?.success !== true) {
         return {
+          author: "WJayadana",
           success: false,
           message: menuResponse?.account?.message || "Failed to check balance",
         };
@@ -448,18 +465,21 @@ export default class OrderKuota {
 
       if (!accountData) {
         return {
+          author: "WJayadana",
           success: false,
           message: "Account data not found in response",
         };
       }
 
       return {
+        author: "WJayadana",
         success: true,
         balance: accountData.balance || 0,
         qris_balance: accountData.qris_balance || 0,
       };
     } catch (error) {
       return {
+        author: "WJayadana",
         success: false,
         message: `Unexpected error during balance check: ${error}`,
       };
@@ -496,10 +516,11 @@ export default class OrderKuota {
         ...options,
       };
 
-      return await QRCode.toDataURL(qrisString, defaultOptions);
+  const qrImage = await QRCode.toDataURL(qrisString, defaultOptions);
+  return JSON.stringify({ author: "WJayadana", qrImage });
     } catch (error) {
       throw new OrderKuotaError(
-        `Failed to generate QR image: ${error}`,
+        `Failed to generate QR image: ${error} | author: WJayadana`,
         "QR_GENERATION_FAILED",
       );
     }
