@@ -1,6 +1,6 @@
 {
   "name": "jywa-orkut",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "OrderKuota API wrapper for Node.js",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -25,6 +25,7 @@
     "orderkuota",
     "orderkuota-wrapper",
     "orderkuota-api",
+    "jywa-orkut",
     "api",
     "wrapper",
     "typescript",
