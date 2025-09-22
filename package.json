@@ -1,0 +1,51 @@
+{
+  "name": "jywa-orkut",
+  "version": "1.2.0",
+  "description": "OrderKuota API wrapper for Node.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "package:publish": "npm run build && npm pack && npm publish",
+    "docs:generate": "typedoc --out docs"
+  },
+  "license": "MIT",
+  "author": "WJayadana",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WJayadana/jywa-orkut"
+  },
+  "keywords": [
+    "orderkuota",
+    "orderkuota-wrapper",
+    "orderkuota-api",
+    "api",
+    "wrapper",
+    "typescript",
+    "qris",
+    "qris-payment",
+    "indonesian-payment",
+    "payment-gateway"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.0.0",
+    "typedoc-plugin-markdown": "^4.6.4",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/qs": "^6.14.0",
+    "axios": "^1.7.9",
+    "qrcode": "^1.5.4",
+    "qs": "^6.14.0",
+    "typedoc": "^0.28.5"
+  },
+  "private": false
+}
