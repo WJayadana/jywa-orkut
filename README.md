@@ -77,7 +77,7 @@ npm run example:ts    # TypeScript example
 
 ## Documentation
 
-📚 **Complete API documentation**: [GitHub Pages](https://WJayadana.github.io/OrderKuota-Wrapper/)
+📚 **Complete API documentation**: [GitHub Pages](https://WJayadana.github.io/jywa-orkut/)
 
 ## Development
 
@@ -98,8 +98,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/WJayadana/OrderKuota-Wrapper/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/WJayadana/OrderKuota-Wrapper/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/WJayadana/jywa-orkut/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/WJayadana/jywa-orkut/discussions)
 
 ---
 
