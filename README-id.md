@@ -1,6 +1,6 @@
 # OrderKuota Node.js API Wrapper (Versi Bahasa Indonesia)
 
-Pembungkus API OrderKuota QRIS Indonesia untuk Node.js dengan dukungan TypeScript.
+OrderKuota Node.js API Wrapper adalah sebuah pustaka (library) untuk mengakses layanan pembayaran QRIS OrderKuota secara mudah melalui Node.js dan TypeScript. Proyek ini bertujuan membantu developer mengintegrasikan fitur pembayaran QRIS, autentikasi OTP, cek saldo, dan riwayat transaksi ke dalam aplikasi mereka dengan cepat dan aman.
 
 ## Fitur
 
