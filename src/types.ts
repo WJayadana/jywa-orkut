@@ -1,6 +1,7 @@
 /**
  * Configuration for initializing OrderKuota client
  */
+
 export interface OrderKuotaConfig {
   /** Username for authentication */
   username: string;
