@@ -1,106 +1,50 @@
+
+
 # OrderKuota Node.js API Wrapper
 
-A TypeScript-first Node.js wrapper for the OrderKuota Indonesian QRIS payment API.
+OrderKuota Node.js API Wrapper adalah sebuah pustaka (library) untuk mengakses layanan pembayaran QRIS OrderKuota secara mudah melalui Node.js dan TypeScript. Proyek ini bertujuan membantu developer mengintegrasikan fitur pembayaran QRIS, autentikasi OTP, cek saldo, dan riwayat transaksi ke dalam aplikasi mereka dengan cepat dan aman.
 
-## Features
 
-- ✅ **Full TypeScript Support** - Complete type definitions and IDE autocomplete
-- ✅ **QRIS Payment Generation** - Generate QRIS Ajaib payments with QR codes
-- ✅ **Authentication Flow** - OTP-based login with token management
-- ✅ **Transaction History** - Fetch and filter QRIS transaction records
-- ✅ **Balance Checking** - Check account and QRIS balances
-- ✅ **QR Code Generation** - Convert QRIS strings to base64 QR images
+## Fitur
 
-## Installation
+- ✅ **Dukungan TypeScript Penuh** - Definisi tipe lengkap dan autocomplete IDE
+- ✅ **Pembuatan Pembayaran QRIS** - Buat pembayaran QRIS Ajaib beserta kode QR
+- ✅ **Alur Autentikasi** - Login berbasis OTP dengan manajemen token
+- ✅ **Riwayat Transaksi** - Ambil dan filter riwayat transaksi QRIS
+- ✅ **Cek Saldo** - Cek saldo akun dan QRIS
+- ✅ **Pembuatan Kode QR** - Konversi string QRIS ke gambar QR base64
+
+
+## Instalasi
 
 ```bash
 npm install jywa-orkut
 ```
 
-## Quick Start
 
-```javascript
-import OrderKuota from 'jywa-orkut';
+## Mulai Cepat
 
-const client = new OrderKuota({
-  username: 'your-username',
-  password: 'your-password'
-});
 
-// Request OTP
-const otp = await client.getOTP();
-console.log('OTP sent to:', otp.email);
+# OrderKuota Node.js API Wrapper
 
-// Get authentication token
-const token = await client.getToken('123456');
+OrderKuota Node.js API Wrapper adalah pustaka untuk mengakses layanan pembayaran QRIS OrderKuota secara mudah melalui Node.js dan TypeScript. Proyek ini bertujuan membantu developer mengintegrasikan fitur pembayaran QRIS, autentikasi OTP, cek saldo, dan riwayat transaksi ke dalam aplikasi mereka dengan cepat dan aman.
 
-// Generate QRIS payment
-const payment = await client.generateQRISAjaib(10000);
-const qrString = payment.qris_ajaib.results.qr_string;
+## Fitur
 
-// Generate QR code image
-const qrImage = await client.generateQRImage(qrString);
-```
-
-## TypeScript Usage
-
-```typescript
-import OrderKuota, { OrderKuotaConfig, OrderKuotaError } from 'jywa-orkut';
-
-const config: OrderKuotaConfig = {
-  username: 'your-username',
-  password: 'your-password'
-};
-
-const client = new OrderKuota(config);
-
-try {
-  const payment = await client.generateQRISAjaib(25000);
-  // Full type safety and IDE autocomplete
-} catch (error) {
-  if (error instanceof OrderKuotaError) {
-    console.error(`Error [${error.code}]:`, error.message);
-  }
-}
-```
-
-## Examples
-
-- [`example/typescript-example.ts`](example/typescript-example.ts) - Complete TypeScript workflow
-- [`example/javascript-example.js`](example/javascript-example.js) - JavaScript implementation
-
-Run examples:
-```bash
-npm run example:js    # JavaScript example
-npm run example:ts    # TypeScript example
-```
-
-## Documentation
-
-📚 **Complete API documentation**: [GitHub Pages](https://WJayadana.github.io/jywa-orkut/)
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build project
-npm run build
-
-# Generate documentation
-npm run docs:generate
-```
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## Support
-
-- 🐛 **Issues**: [GitHub Issues](https://github.com/WJayadana/jywa-orkut/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/WJayadana/jywa-orkut/discussions)
+- Dukungan TypeScript penuh
+- Pembuatan pembayaran QRIS
+- Autentikasi OTP
+- Cek saldo dan riwayat transaksi
 
 ---
 
-**Disclaimer**: This is an unofficial wrapper. Please comply with OrderKuota's terms of service.
+<a href="README-id.md"><img src="https://img.shields.io/badge/Cara%20Penggunaan-Bahasa%20Indonesia-blue?style=for-the-badge" alt="Cara Penggunaan Bahasa Indonesia"></a>
+<a href="README-en.md"><img src="https://img.shields.io/badge/Usage%20Guide-English-green?style=for-the-badge" alt="Usage Guide English"></a>
+
+---
+
+Untuk petunjuk penggunaan dan dokumentasi lengkap, silakan klik tombol di atas sesuai bahasa yang diinginkan.
+
+Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detail.
+
+**Disclaimer**: Ini adalah pembungkus tidak resmi. Harap patuhi syarat dan ketentuan OrderKuota.
